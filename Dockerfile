@@ -30,5 +30,10 @@ RUN mkdir -p /var/www/html/bootstrap/cache && \
     chmod -R 775 /var/www/html/bootstrap/cache && \
     chown -R www-data:www-data /var/www/html/bootstrap/cache
 
+# dummy db for build
+RUN mkdir -p /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/bootstrap/cache && \
+    chown -R www-data:www-data /var/www/html/bootstrap/cache
+
 # Install production dependencies
 RUN composer install --prefer-dist --no-dev --no-interaction --optimize-autoloader
