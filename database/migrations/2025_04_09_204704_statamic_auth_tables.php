@@ -14,6 +14,7 @@ class StatamicAuthTables extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->uuid('id')->change();
             $table->boolean('super')->default(false);
             $table->string('avatar')->nullable();
             $table->json('preferences')->nullable();
@@ -23,13 +24,15 @@ class StatamicAuthTables extends Migration
 
         Schema::create('role_user', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('role_id');
         });
 
         Schema::create('group_user', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('group_id');
         });
 
