@@ -14,7 +14,7 @@ class StatamicAuthTables extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid('id')->change();
+            // $table->uuid('id')->change();
             $table->boolean('super')->default(false);
             $table->string('avatar')->nullable();
             $table->json('preferences')->nullable();
