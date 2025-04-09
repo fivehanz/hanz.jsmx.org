@@ -56,7 +56,7 @@ return [
     |
     */
 
-    'send_powered_by_header' => true,
+    'send_powered_by_header' => false,
 
     /*
     |--------------------------------------------------------------------------
