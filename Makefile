@@ -19,7 +19,7 @@ clean-frontend-node-modules:
 
 ### installs the virtual environment and dependencies
 django-install:
-	uv sync --locked
+	uv sync
 
 django-dev:
 	uv run granian --reload \
