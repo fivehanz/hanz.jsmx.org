@@ -1,0 +1,35 @@
+[project]
+name = "wagtail-starter-kit"
+version = "0.2.2"
+description = "A modern, flexible Wagtail starter kit for marketing websites"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "wagtail>=7.0,<7.1",
+    "python-webpack-boilerplate>=1.0.4",
+    "wagtail-seo>=3.1.0",
+    "wagtail-flexible-forms>=2.1.0",
+    "wagtail-cache>=3.0.0",
+    "django-redis>=5.4.0",
+    "whitenoise>=6.9.0",
+    "pillow>=10.4.0",
+    "uuid6>=2025.0.1",
+    "django-environ>=0.12.0",
+    "granian[reload]>=2.5.0",
+    "django-actioncable>=1.0.4",
+    "django-turbo-helper>=2.1.4",
+    "django-vite>=3.1.0",
+    "django-storages>=1.14.0",
+    "boto3>=1.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6.0",
+    "black>=24.4.0",
+    "isort>=5.13.0",
+    "pytest>=8.3.0",
+    "pytest-django>=4.8.0",
+    "pre-commit>=4.2.0",
+]
