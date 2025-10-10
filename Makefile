@@ -61,7 +61,7 @@ dev-createsuperuser:
 prod-start:
 	env ENVIRONMENT=production uv run granian \
 		--interface asginl \
- 		--workers 3 \
+ 		--workers 2 \
  		--runtime-mode mt \
  		--host 0.0.0.0 \
  		--port 8000 \
