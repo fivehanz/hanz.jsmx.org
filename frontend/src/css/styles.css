@@ -20,15 +20,15 @@
   default: true;
   prefersdark: true;
   color-scheme: "dark";
-  --color-base-100: oklch(0.1149 0.0385 25.69);
-  --color-base-200: oklch(0.2089 0.0793 31.93);
-  --color-base-300: oklch(0.2816 0.1073 31.79);
-  --color-base-content: oklch(0.9487 0.0256 26.53);
+  --color-base-100: oklch(0.0933 0.0375 3.86);
+  --color-base-200: oklch(0.1817 0.0726 12.18);
+  --color-base-300: oklch(0.2799 0.0751 19.78);
+  --color-base-content: oklch(97% 0.013 17.38);
   --color-primary: oklch(0.5851 0.2342 30.06);
   --color-primary-content: oklch(97% 0.013 17.38);
   --color-secondary: oklch(65% 0.241 354.308);
   --color-secondary-content: oklch(94% 0.028 342.258);
-  --color-accent: oklch(0.8444 0.0998 65.78);
+  --color-accent: oklch(0.8743 0.1509 92.18);
   --color-accent-content: oklch(0.3938 0.0953 56.99);
   --color-neutral: oklch(0.28 0.0323 261.69);
   --color-neutral-content: oklch(92% 0.004 286.32);
@@ -37,7 +37,7 @@
   --color-success: oklch(76% 0.177 163.223);
   --color-success-content: oklch(37% 0.077 168.94);
   --color-warning: oklch(82% 0.189 84.429);
-  --color-warning-content: oklch(47% 0.137 46.201);
+  --color-warning-content: oklch(41% 0.112 45.904);
   --color-error: oklch(71% 0.194 13.428);
   --color-error-content: oklch(27% 0.105 12.094);
   --radius-selector: 0.5rem;
@@ -45,7 +45,7 @@
   --radius-box: 0.5rem;
   --size-selector: 0.3125rem;
   --size-field: 0.3125rem;
-  --border: 0.5px;
+  --border: 2px;
   --depth: 1;
   --noise: 1;
 }
