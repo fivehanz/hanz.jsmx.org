@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0 (2025-12-07)
+
+
+### Features
+
+* update theme ([c5fdc2f](https://github.com/fivehanz/hanz.jsmx.org/commit/c5fdc2f55182fca64d0b831107739ace3aa3e1e0))
+
+
+### Bug Fixes
+
+* color aesthetics ([9302518](https://github.com/fivehanz/hanz.jsmx.org/commit/9302518a3d36f14b076b5775a0e96c1c987627af))
+* use 2 workers instead of 3 ([d63b548](https://github.com/fivehanz/hanz.jsmx.org/commit/d63b54874394fa30df438bc6b492f7127344267d))
+* use python@3.12.11 ([74c0b3f](https://github.com/fivehanz/hanz.jsmx.org/commit/74c0b3f860311c500312afce05064de7c10f1f64))
+* uv sync ([4e944c6](https://github.com/fivehanz/hanz.jsmx.org/commit/4e944c62f9ef472542f2d3bd37c5f30498542320))
+
 ## [0.2.2](https://github.com/junoxlabs/wagtail-starter-kit/compare/v0.2.1...v0.2.2) (2025-10-09)
 
 
