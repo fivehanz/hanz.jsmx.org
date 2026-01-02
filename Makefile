@@ -34,13 +34,13 @@ django-dev:
 
 .PHONY: vite-dev
 vite-dev:
-	cd frontend && bun --bun run dev
+	cd frontend && pnpm run dev
 
 frontend-install:
-	cd frontend && bun --bun install
+	cd frontend && pnpm install
 
 vite-build:
-	cd frontend && bun --bun run build
+	cd frontend && pnpm run build
 
 makemigrations make migrations:
 	uv run python manage.py makemigrations
