@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0 (2026-01-03)
+
+
+### Features
+
+* update theme ([c5fdc2f](https://github.com/fivehanz/hanz.jsmx.org/commit/c5fdc2f55182fca64d0b831107739ace3aa3e1e0))
+* use node 22 + pnpm 10 over bun ([5762f7c](https://github.com/fivehanz/hanz.jsmx.org/commit/5762f7c48e954a56db4bca71568dc4783688a280))
+
+
+### Bug Fixes
+
+* color aesthetics ([9302518](https://github.com/fivehanz/hanz.jsmx.org/commit/9302518a3d36f14b076b5775a0e96c1c987627af))
+* resource showcase page template ([78d7112](https://github.com/fivehanz/hanz.jsmx.org/commit/78d7112cfaa6aea597eab7fe1626754ee30b38f3))
+* sort order showcase ([06c0c5f](https://github.com/fivehanz/hanz.jsmx.org/commit/06c0c5ff163cb8a0fc2236f5e07531abb39766c6))
+* sub color on res showcase ([58aa490](https://github.com/fivehanz/hanz.jsmx.org/commit/58aa490c463ead34128e20273d6a8d3fb3f1229d))
+* use 2 workers instead of 3 ([d63b548](https://github.com/fivehanz/hanz.jsmx.org/commit/d63b54874394fa30df438bc6b492f7127344267d))
+* use python@3.12.11 ([74c0b3f](https://github.com/fivehanz/hanz.jsmx.org/commit/74c0b3f860311c500312afce05064de7c10f1f64))
+* uv sync ([4e944c6](https://github.com/fivehanz/hanz.jsmx.org/commit/4e944c62f9ef472542f2d3bd37c5f30498542320))
+
 ## [0.2.2](https://github.com/junoxlabs/wagtail-starter-kit/compare/v0.2.1...v0.2.2) (2025-10-09)
 
 
