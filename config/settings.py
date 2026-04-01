@@ -83,7 +83,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -147,22 +147,7 @@ DATABASES = {
                 PRAGMA cache_size=2000;
             """,
         },
-    },
-    "cache": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db/cache.db",
-        "OPTIONS": {
-            "transaction_mode": "IMMEDIATE",
-            "timeout": 5,  # seconds
-            "init_command": """
-                PRAGMA journal_mode=WAL;
-                PRAGMA synchronous=NORMAL;
-                PRAGMA mmap_size=134217728;
-                PRAGMA journal_size_limit=27103364;
-                PRAGMA cache_size=2000;
-            """,
-        },
-    },
+    }
 }
 
 DATABASE_ROUTERS = ["config.routers.CacheRouter"]
@@ -220,15 +205,14 @@ STORAGES = {
         },
     },
     "staticfiles": {
-        # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
 # AWS settings for S3
-AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID", default="minioadmin")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY", default="minioadmin")
+AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME", default="bucket")
 AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME", default="us-east-1")
 AWS_S3_ENDPOINT_URL = env("AWS_S3_ENDPOINT_URL", default=None)
 AWS_S3_FILE_OVERWRITE = False
@@ -295,8 +279,8 @@ WAGTAIL_CACHE_BACKEND = "default"
 # Cache settings
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "cache",
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "wsk-cache",
     }
 }
 
