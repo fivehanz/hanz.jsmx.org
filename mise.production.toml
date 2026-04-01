@@ -1,0 +1,5 @@
+[tools]
+just = "1.46"
+litestream = "0.5"
+python = "3.14"
+uv = "0.10"

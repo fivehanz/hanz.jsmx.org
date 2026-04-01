@@ -1,0 +1,7 @@
+[tools]
+just = "1.46"
+litestream = "0.5"
+node = "22"
+pnpm = "10"
+python = "3.14"
+uv = "0.10"
