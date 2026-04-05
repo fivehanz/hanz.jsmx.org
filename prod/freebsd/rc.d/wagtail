@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# PROVIDE: wagtail
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="wagtail"
+rcvar="${name}_enable"
+
+load_rc_config "$name"
+
+: ${wagtail_enable:=NO}
+: ${wagtail_user:=www}
+: ${wagtail_group:=www}
+: ${wagtail_command:=/usr/local/www/wagtail/prod/freebsd/scripts/start.sh}
+: ${wagtail_pidfile:=/var/run/wagtail.pid}
+: ${wagtail_sock:=/var/run/wagtail.sock}
+: ${wagtail_log:=/var/log/wagtail.log}
+
+command="/usr/sbin/daemon"
+
+command_args="
+-f
+-r
+-u ${wagtail_user}
+-p ${wagtail_pidfile}
+-o ${wagtail_log}
+${wagtail_command}
+"
+
+extra_commands="reload"
+reload_cmd="wagtail_reload"
+
+start_precmd="wagtail_prestart"
+stop_postcmd="wagtail_poststop"
+
+# ---- hooks ---- #
+
+wagtail_prestart()
+{
+    # remove stale socket
+    [ -S "${wagtail_sock}" ] && rm -f "${wagtail_sock}"
+
+    # remove stale pid
+    [ -f "${wagtail_pidfile}" ] && rm -f "${wagtail_pidfile}"
+}
+
+wagtail_poststop()
+{
+    # cleanup socket after stop
+    [ -S "${wagtail_sock}" ] && rm -f "${wagtail_sock}"
+}
+
+# graceful reload (zero-downtime-ish)
+wagtail_reload()
+{
+    if [ -f "${wagtail_pidfile}" ]; then
+        kill -HUP "$(cat ${wagtail_pidfile})"
+    fi
+}
+
+run_rc_command "$1"

@@ -22,15 +22,7 @@ django-install:
 	uv sync
 
 django-dev:
-	uv run granian --reload \
-		--reload-ignore-paths /app/db/ \
-		--interface asginl \
-		--workers 2 \
-		--runtime-mode mt \
-		--log-level debug \
-		--host 0.0.0.0 \
-		--port 8000 \
-		config.asgi:application
+	DEBUG=true uv run python manage.py runserver 0.0.0.0:8000
 
 .PHONY: vite-dev
 vite-dev:
@@ -59,13 +51,12 @@ dev-createsuperuser:
 	docker compose -f dev/docker-compose.dev.yml exec app env DJANGO_SUPERUSER_PASSWORD=admin uv run python manage.py createsuperuser --noinput --username admin --email admin@example.com
 
 prod-start:
-	env ENVIRONMENT=production uv run granian \
+	mise -E production exec uv -- uv run granian \
 		--interface asginl \
- 		--workers 2 \
- 		--runtime-mode mt \
- 		--host 0.0.0.0 \
- 		--port 8000 \
- 		config.asgi:application
+		--workers 1 \
+		--host 0.0.0.0 \
+		--port 8000 \
+		config.asgi:application
 
 #### DOCKER DEV #### -----------------------------------------------------------------------------
 .PHONY: dev-up dev

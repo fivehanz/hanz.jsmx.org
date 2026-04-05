@@ -1,0 +1,28 @@
+import http from "k6/http";
+import { sleep } from "k6";
+
+export const options = {
+  vus: 1000,
+  duration: "3m",
+
+  thresholds: {
+    http_req_duration: ["p(95)<1000"],
+    http_req_failed: ["rate<0.01"],
+  },
+};
+
+const BASE = __ENV.BASE || "https://example.com";
+
+export default function () {
+  http.get(`${BASE}/`);
+  http.get(`${BASE}/about/`);
+  http.get(`${BASE}/projects/`);
+  http.get(`${BASE}/resources/`);
+  http.get(`${BASE}/contact/`);
+  http.get(`${BASE}/static/main-D1fVxiCl.css`);
+  http.get(`${BASE}/static/main-D8PWxci-.js`);
+  //   http.get(`${BASE}/static/main-CvG9S7vg.css`);
+  //   http.get(`${BASE}/static/main-DYi7xrNE.js`);
+
+  sleep(1); // critical: prevents generator meltdown
+}
