@@ -13,6 +13,7 @@ env = environ.Env(
     ENVIRONMENT=(str, "development"),
     SECRET_KEY=(str, "django-insecure-dummy-key-for-builds-and-dev-only"),
     # DATABASE_URL=(str, "sqlite:///dummy.db"),
+    DATABASE_PATH=(str, BASE_DIR / "db/database.db"),
     ALLOWED_HOSTS=(str, "*"),
     CSRF_TRUSTED_ORIGINS=(str, "https://*, http://*"),
     USE_X_FORWARDED_HOST=(bool, False),
@@ -135,7 +136,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db/database.db",
+        "NAME": env("DATABASE_PATH"),
         "OPTIONS": {
             "transaction_mode": "IMMEDIATE",
             "timeout": 5,  # seconds
@@ -149,8 +150,6 @@ DATABASES = {
         },
     }
 }
-
-DATABASE_ROUTERS = ["config.routers.CacheRouter"]
 
 
 # Password validation
