@@ -10,9 +10,9 @@ prod-setup:
     just freebsd-litestream-configure
     just setup-pip
     just setup-pf
-    just setup-staticfiles
 
 prod-post-setup:
+    just setup-staticfiles
     just litestream-restore
     just setup-db
     just prod-start
