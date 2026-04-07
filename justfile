@@ -39,7 +39,7 @@ freebsd-nginx-configure:
             /usr/local/etc/nginx/conf.d/wagtail.conf
 
     # start nginx
-    service nginx start
+    service nginx restart || service nginx start
 
 freebsd-litestream-configure:
     # enable litestream
