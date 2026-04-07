@@ -1,27 +1,21 @@
+# credentials (from env)
+access-key-id: ${LITESTREAM_ACCESS_KEY_ID}
+secret-access-key: ${LITESTREAM_SECRET_ACCESS_KEY}
+
 dbs:
   - path: ${DATABASE_PATH}
-
     replicas:
       - type: s3
-
         # destination
         bucket: ${LITESTREAM_BUCKET}
-        path: ${LITESTREAM_PATH}
-
+        path: database.db
         # region / endpoint (supports S3-compatible too)
         region: ${LITESTREAM_REGION:-us-east-1}
         endpoint: ${LITESTREAM_ENDPOINT_URL:-}
-
         # only needed for MinIO / R2 / non-AWS
         force-path-style: ${LITESTREAM_FORCE_PATH_STYLE:-false}
-
-        # credentials (from env)
-        access-key-id: ${LITESTREAM_ACCESS_KEY_ID}
-        secret-access-key: ${LITESTREAM_SECRET_ACCESS_KEY}
-
         # performance tuning (important for 512MB)
         sync-interval: 2s
         snapshot-interval: 1h
-
         # retention (S3 only)
         retention: 168h
