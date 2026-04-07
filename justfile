@@ -8,7 +8,7 @@ prod-setup:
     just freebsd-nginx-configure
     just freebsd-wagtail-configure
     just freebsd-litestream-configure
-    just setup-uv
+    just setup-pip
     just setup-pf
     just setup-staticfiles
 
@@ -18,7 +18,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes nginx litestream just python311 py311-pillow py311-pillow-heif py311-granian py311-uv
+    pkg install --yes nginx litestream just python311 py311-pillow py311-pillow-heif py311-granian py311-pip
 
 freebsd-nginx-configure:
     # enable nginx
@@ -110,6 +110,9 @@ setup-mise:
     # trust and install
     CMD="mise trust" just run-www
     CMD="mise install" just run-www
+
+setup-pip:
+    CMD="pip install --user -r requirements.txt" just run-www
 
 setup-uv:
     CMD="uv sync --locked --no-cache --no-dev" just run-www
