@@ -50,6 +50,10 @@ freebsd-litestream-configure:
     ln -sf $(pwd)/prod/freebsd/litestream/litestream.yml \
         /usr/local/etc/litestream.yml
 
+    # install rc.d service from repo
+    install -m 555 $(pwd)/prod/freebsd/rc.d/litestream \
+        /usr/local/etc/rc.d/litestream
+
 litestream-status:
     @echo "== service status =="
     service litestream status || true
@@ -63,10 +67,11 @@ litestream-status:
 litestream-restore:
     # load env
     . /usr/local/etc/wagtail/env && \
-    echo "Restoring to $$DATABASE_PATH" && \
+    echo "Restoring to $DATABASE_PATH" && \
     litestream restore \
+        -config /usr/local/etc/litestream.yml \
         -if-replica-exists \
-        -o $$DATABASE_PATH
+        -o $DATABASE_PATH
 
 litestream-backup:
     # load env

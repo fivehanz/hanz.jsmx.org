@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# PROVIDE: litestream
+# REQUIRE: NETWORKING
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="litestream"
+rcvar="litestream_enable"
+
+: ${litestream_enable:=NO}
+: ${litestream_config:=/usr/local/etc/litestream.yml}
+
+pidfile="/var/run/litestream.pid"
+
+command="/usr/sbin/daemon"
+command_args="-u www -p ${pidfile} \
+    /usr/local/bin/litestream replicate -config ${litestream_config}"
+
+load_rc_config $name
+
+run_rc_command "$1"
