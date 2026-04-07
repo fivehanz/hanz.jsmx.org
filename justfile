@@ -112,7 +112,7 @@ setup-mise:
     CMD="mise install" just run-www
 
 setup-uv:
-    CMD="uv sync --locked" just run-www
+    CMD="uv sync --locked --no-cache" just run-www
 
 setup-pf:
     # enable pf at boot
@@ -154,6 +154,8 @@ prod-start:
 run-www:
     env HOME=/home/www su -m www -c '$CMD'
 
+git-pull:
+	CMD="git pull --ff-only" just run-www
 
 ################################################################################
 # ---- DEV ---- #
