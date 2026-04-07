@@ -18,7 +18,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes nginx litestream just python314 uv
+    pkg install --yes nginx litestream just python311 uv
 
 freebsd-nginx-configure:
     # enable nginx
