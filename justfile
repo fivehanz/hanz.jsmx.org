@@ -134,7 +134,7 @@ setup-pf:
     pfctl -f /etc/pf.conf
 
     # start pf if not running
-    service pf start || true
+    service pf restart || service pf start
 
     # show active rules (sanity check)
     pfctl -sr
