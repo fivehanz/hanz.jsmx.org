@@ -5,7 +5,6 @@ export PROD_ENV := "production"
 # ---- PROD ---- #
 
 prod-setup $ENVIRONMENT=PROD_ENV:
-    just freebsd-setup-pkgs
     just freebsd-nginx-configure
     just freebsd-wagtail-configure
     just freebsd-litestream-configure
@@ -102,15 +101,19 @@ freebsd-wagtail-configure:
     # enable service
     sysrc wagtail_enable=YES
 
-setup-mise:
-    # replace development with production in .miserc.toml
+mise-set-to-dev:
+    sed -i 's/production/development/g' .miserc.toml
+
+mise-set-to-prod:
     sed -i 's/development/production/g' .miserc.toml
+
+setup-mise:
     # trust and install
-    mise -E $ENVIRONMENT trust
-    mise -E $ENVIRONMENT install
+    CMD="mise -E $ENVIRONMENT trust" just run-www
+    CMD="mise -E $ENVIRONMENT install" just run-www
 
 setup-uv:
-    mise exec -- uv sync --locked
+    CMD="mise exec -- uv sync --locked" just run-www
 
 setup-pf:
     # enable pf at boot
@@ -135,16 +138,23 @@ setup-pf:
     pfctl -sr
 
 setup-staticfiles:
-	mise exec -- uv run python manage.py collectstatic --no-input --clear
+	CMD="mise exec -- uv run python manage.py collectstatic --no-input --clear" just run-www
 
 setup-db:
     just migrate
 
 migrate:
-	mise exec -- uv run python manage.py migrate
+	CMD="mise exec -- uv run python manage.py migrate" just run-www
 
 prod-start:
+    service litestream restart || service litestream start
     service wagtail restart || service wagtail start
+    service nginx restart || service nginx start
+
+# helper function to run as www on server
+run-www:
+    env HOME=/home/www su -m www -c '$CMD'
+
 
 ################################################################################
 # ---- DEV ---- #
