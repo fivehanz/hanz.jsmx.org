@@ -130,11 +130,8 @@ setup-pf:
     # validate config BEFORE applying (critical)
     pfctl -nf /etc/pf.conf
 
-    # load rules
+    # load rules safely
     pfctl -f /etc/pf.conf
-
-    # start pf if not running
-    service pf restart || service pf start
 
     # show active rules (sanity check)
     pfctl -sr
