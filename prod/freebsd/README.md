@@ -101,6 +101,6 @@ chmod 644 /usr/local/etc/ssl/cf-origin.pem
 # setup pkgs
 
 ```
-pkg install --yes mise nginx litestream
+pkg install --yes mise nginx litestream just
 ```
 

@@ -19,7 +19,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes mise nginx litestream
+    pkg install --yes mise nginx litestream just
 
 freebsd-nginx-configure:
     # enable nginx
