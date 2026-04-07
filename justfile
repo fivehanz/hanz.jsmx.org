@@ -90,9 +90,6 @@ freebsd-wagtail-configure:
     # ensure repo ownership for runtime user
     chown -R www:www /usr/local/www/wagtail
 
-    # keep ops files root-owned
-    chown -R root:wheel /usr/local/www/wagtail/prod
-
     # install rc.d service from repo
     install -m 555 $(pwd)/prod/freebsd/rc.d/wagtail \
         /usr/local/etc/rc.d/wagtail
