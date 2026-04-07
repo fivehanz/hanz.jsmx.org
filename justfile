@@ -8,7 +8,6 @@ prod-setup:
     just freebsd-nginx-configure
     just freebsd-wagtail-configure
     just freebsd-litestream-configure
-    just setup-mise
     just setup-uv
     just setup-pf
     just setup-staticfiles
@@ -19,7 +18,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes mise nginx litestream just
+    pkg install --yes nginx litestream just python314 uv
 
 freebsd-nginx-configure:
     # enable nginx
@@ -113,7 +112,7 @@ setup-mise:
     CMD="mise install" just run-www
 
 setup-uv:
-    CMD="mise exec -- uv sync --locked" just run-www
+    CMD="uv sync --locked" just run-www
 
 setup-pf:
     # enable pf at boot
@@ -138,13 +137,13 @@ setup-pf:
     pfctl -sr
 
 setup-staticfiles:
-	CMD="mise exec -- uv run python manage.py collectstatic --no-input --clear" just run-www
+	CMD="uv run python manage.py collectstatic --no-input --clear" just run-www
 
 setup-db:
     just migrate
 
 migrate:
-	CMD="mise exec -- uv run python manage.py migrate" just run-www
+	CMD="uv run python manage.py migrate" just run-www
 
 prod-start:
     service litestream restart || service litestream start
@@ -164,13 +163,13 @@ vite-install:
 	cd frontend && pnpm install
 
 django-install:
-	mise exec -- uv sync
+	uv sync
 
 django-dev:
     DEBUG=true uv run python manage.py runserver 0.0.0.0:8000
 
 makemigrations:
-	mise exec -- uv run python manage.py makemigrations
+	uv run python manage.py makemigrations
 
 vite-dev:
 	cd frontend && pnpm run dev
