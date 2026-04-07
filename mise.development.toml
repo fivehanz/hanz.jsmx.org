@@ -1,5 +1,4 @@
 [tools]
-just = "1.46"
 litestream = "0.5"
 node = "22"
 pnpm = "10"
