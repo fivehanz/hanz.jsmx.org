@@ -41,7 +41,7 @@ fi
 # ---- EXEC ---- #
 
 # ensure mise environment is used from repo
-exec mise exec -- uv run granian \
+python3.11 -m granian \
     --interface asginl \
     --uds "$SOCK" \
     --uds-permissions 660 \

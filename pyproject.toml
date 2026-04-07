@@ -17,7 +17,7 @@ dependencies = [
   "granian==2.6.0",
   "pillow==11.3.0",
   "pillow-heif==1.2.0",
-  "python-webpack-boilerplate>=1.0.4",
+  # "python-webpack-boilerplate>=1.0.4",
   "uuid6>=2025.0.1",
   "wagtail>=7.0,<7.1",
   "wagtail-cache>=3.0.0",

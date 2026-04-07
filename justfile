@@ -18,7 +18,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes nginx litestream just python311 py311-pillow py311-pillow-heif py311-granian py311-pip
+    pkg install --yes nginx litestream just python311 py311-pillow py311-pillow-heif py311-granian py311-sqlite3 py311-pip
 
 freebsd-nginx-configure:
     # enable nginx
@@ -111,6 +111,9 @@ setup-mise:
     CMD="mise trust" just run-www
     CMD="mise install" just run-www
 
+prepare-pip:
+    uv lock
+    uv pip compile pyproject.toml > requirements.txt
 setup-pip:
     CMD="pip install --user -r requirements.txt" just run-www
 
@@ -140,13 +143,13 @@ setup-pf:
     pfctl -sr
 
 setup-staticfiles:
-	CMD="uv run python manage.py collectstatic --no-input --clear" just run-www
+	CMD="python3.11 manage.py collectstatic --no-input --clear" just run-www
 
 setup-db:
     just migrate
 
 migrate:
-	CMD="uv run python manage.py migrate" just run-www
+	CMD="python3.11 manage.py migrate" just run-www
 
 prod-start:
     service litestream restart || service litestream start
