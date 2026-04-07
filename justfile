@@ -112,7 +112,7 @@ setup-mise:
     CMD="mise install" just run-www
 
 setup-uv:
-    CMD="uv sync --locked --no-cache" just run-www
+    CMD="uv sync --locked --no-cache --no-dev" just run-www
 
 setup-pf:
     # enable pf at boot
