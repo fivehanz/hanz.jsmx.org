@@ -4,7 +4,7 @@ export PROD_ENV := "production"
 
 # ---- PROD ---- #
 
-prod-setup $ENVIRONMENT=PROD_ENV:
+prod-setup:
     just freebsd-nginx-configure
     just freebsd-wagtail-configure
     just freebsd-litestream-configure
@@ -109,8 +109,8 @@ mise-set-to-prod:
 
 setup-mise:
     # trust and install
-    CMD="mise -E $ENVIRONMENT trust" just run-www
-    CMD="mise -E $ENVIRONMENT install" just run-www
+    CMD="mise trust" just run-www
+    CMD="mise install" just run-www
 
 setup-uv:
     CMD="mise exec -- uv sync --locked" just run-www
