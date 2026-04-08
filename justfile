@@ -1,6 +1,7 @@
 export SITE := "hanz.jsmx.org"
 export DEV_ENV := "development"
 export PROD_ENV := "production"
+export VENV_PY := ".venv/bin/python"
 
 # ---- PROD ---- #
 
@@ -141,13 +142,13 @@ setup-pf:
     pfctl -sr
 
 setup-staticfiles:
-	CMD="python3.11 manage.py collectstatic --no-input --clear" just run-www
+	CMD="$VENV_PY manage.py collectstatic --no-input --clear" just run-www
 
 setup-db:
     just migrate
 
 migrate:
-	CMD="python3.11 manage.py migrate" just run-www
+	CMD="$VENV_PY manage.py migrate" just run-www
 
 prod-start:
     service litestream restart || service litestream start
