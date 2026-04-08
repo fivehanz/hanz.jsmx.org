@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False),
+    DJANGO_DEBUG=(bool, False),
     ENVIRONMENT=(str, "development"),
     SECRET_KEY=(str, "django-insecure-dummy-key-for-builds-and-dev-only"),
     # DATABASE_URL=(str, "sqlite:///dummy.db"),
@@ -32,7 +32,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = env("DJANGO_DEBUG")
 
 
 INSTALLED_APPS = [
