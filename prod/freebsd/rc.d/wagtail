@@ -21,14 +21,7 @@ load_rc_config "$name"
 
 command="/usr/sbin/daemon"
 
-command_args="
--f
--u ${wagtail_user}
--p ${wagtail_pidfile}
--P
--o ${wagtail_log}
-${wagtail_command}
-"
+command_args="-f -u ${wagtail_user} -p ${wagtail_pidfile} -P -o ${wagtail_log} ${wagtail_command}"
 
 extra_commands="reload"
 reload_cmd="wagtail_reload"
