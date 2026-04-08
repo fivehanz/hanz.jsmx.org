@@ -21,7 +21,8 @@ env = environ.Env(
     WAGTAILADMIN_BASE_URL=(str, "http://localhost:8000"),
 )
 
-# Take environment variables from prod env file
+# environment variables
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 environ.Env.read_env("/usr/local/etc/wagtail/env")
 
 
