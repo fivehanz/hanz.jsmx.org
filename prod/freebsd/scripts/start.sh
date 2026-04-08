@@ -43,7 +43,7 @@ exec "$VENV/bin/python" -m uvicorn config.asgi:application \
     --workers 1 \
     --loop uvloop \
     --http h11 \
-    --limit-concurrency 64 \
+    --limit-concurrency 128 \
     --timeout-keep-alive 16 \
     --backlog 512 \
     --log-level warning 
