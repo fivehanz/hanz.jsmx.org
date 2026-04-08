@@ -67,8 +67,7 @@ litestream-status:
 
 litestream-restore:
     @echo "== restore =="
-    CMD="set -eu; . /usr/local/etc/wagtail/env; echo Restoring to $$DATABASE_PATH; \
-        litestream restore -config /usr/local/etc/litestream.yml -if-replica-exists -o $$DATABASE_PATH $$DATABASE_PATH" \
+    CMD="$(pwd)/prod/freebsd/scripts/litestream-restore.sh" \
         just run-www
 
 litestream-backup:
