@@ -15,7 +15,7 @@ rcvar="litestream_enable"
 pidfile="/var/run/litestream.pid"
 
 command="/usr/sbin/daemon"
-command_args="-u www -p ${pidfile} -f \
+command_args="-u www -p ${pidfile} -P -f \
     /usr/local/www/wagtail/prod/freebsd/scripts/litestream.sh"
 
 load_rc_config $name
