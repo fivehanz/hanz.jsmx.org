@@ -8,9 +8,9 @@ asgiref==3.11.1
     #   django
 beautifulsoup4==4.14.3
     # via wagtail
-boto3==1.42.84
+boto3==1.42.85
     # via wagtail-starter-kit (pyproject.toml)
-botocore==1.42.84
+botocore==1.42.85
     # via
     #   boto3
     #   s3transfer
@@ -23,10 +23,10 @@ charset-normalizer==3.4.7
 click==8.1.7
     # via
     #   wagtail-starter-kit (pyproject.toml)
-    #   granian
+    #   uvicorn
 defusedxml==0.7.1
     # via willow
-django==5.2.12
+django==5.2.13
     # via
     #   wagtail-starter-kit (pyproject.toml)
     #   channels
@@ -84,8 +84,8 @@ et-xmlfile==2.0.0
     # via openpyxl
 filetype==1.2.0
     # via willow
-granian==2.6.0
-    # via wagtail-starter-kit (pyproject.toml)
+h11==0.16.0
+    # via uvicorn
 idna==3.11
     # via requests
 jmespath==1.1.0
@@ -131,6 +131,10 @@ urllib3==2.6.3
     #   botocore
     #   requests
 uuid6==2025.0.1
+    # via wagtail-starter-kit (pyproject.toml)
+uvicorn==0.41.0
+    # via wagtail-starter-kit (pyproject.toml)
+uvloop==0.21.0
     # via wagtail-starter-kit (pyproject.toml)
 wagtail==7.0.6
     # via
