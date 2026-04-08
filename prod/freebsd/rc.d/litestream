@@ -13,9 +13,12 @@ rcvar="litestream_enable"
 : ${litestream_config:=/usr/local/etc/litestream.yml}
 
 pidfile="/var/run/litestream.pid"
+procname="/usr/local/bin/litestream"
 
 command="/usr/sbin/daemon"
 command_args="-u www -p ${pidfile} -P -f \
+    -o /var/log/litestream.log \
+    -e /var/log/litestream.err \
     /usr/local/www/wagtail/prod/freebsd/scripts/litestream.sh"
 
 load_rc_config $name
