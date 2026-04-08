@@ -8,6 +8,7 @@ prod-setup:
     just freebsd-nginx-configure
     just freebsd-wagtail-configure
     just freebsd-litestream-configure
+    just setup-env
     just setup-pip
     just setup-pf
 
@@ -79,6 +80,12 @@ litestream-backup:
     echo "Starting replication..." && \
     litestream replicate
 
+setup-env:
+    # env file (secrets)
+    cp $(pwd)/.env.prod /usr/local/etc/wagtail/env
+    chmod 640 /usr/local/etc/wagtail/env
+    chown root:www /usr/local/etc/wagtail/env
+
 freebsd-wagtail-configure:
     # runtime + data dirs
     install -d -o www -g www -m 755 /var/db/wagtail
@@ -86,11 +93,6 @@ freebsd-wagtail-configure:
 
     # config dir (root-owned)
     install -d -m 755 /usr/local/etc/wagtail
-
-    # env file (secrets)
-    cp $(pwd)/.env.prod /usr/local/etc/wagtail/env
-    chmod 600 /usr/local/etc/wagtail/env
-    chown root:wheel /usr/local/etc/wagtail/env
 
     # ensure repo ownership for runtime user
     chown -R www:www /usr/local/www/wagtail
