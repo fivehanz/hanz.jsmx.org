@@ -59,20 +59,23 @@ litestream-status:
     @echo "== service status =="
     service litestream status || true
 
-    @echo "\n== process =="
+    @echo "== process =="
     pgrep -fl litestream || true
 
-    @echo "\n== socket / activity =="
+    @echo "== socket / activity =="
     sockstat -4 | grep litestream || true
 
 litestream-restore:
-    # load env
-    . /usr/local/etc/wagtail/env && \
-    echo "Restoring to $DATABASE_PATH" && \
-    litestream restore \
-        -config /usr/local/etc/litestream.yml \
-        -if-replica-exists \
-        -o $DATABASE_PATH
+    @echo "== restore =="
+    CMD="set -eu; \
+        . /usr/local/etc/wagtail/env; \
+        echo Restoring to $$DATABASE_PATH; \
+        litestream restore \
+	    -config /usr/local/etc/litestream.yml \
+	    -if-replica-exists \
+	    -o $$DATABASE_PATH \
+	    $$DATABASE_PATH" \
+	just run-www
 
 litestream-backup:
     # load env
