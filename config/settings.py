@@ -17,6 +17,7 @@ env = environ.Env(
     ALLOWED_HOSTS=(str, "*"),
     CSRF_TRUSTED_ORIGINS=(str, "https://*, http://*"),
     USE_X_FORWARDED_HOST=(bool, False),
+    USE_X_FORWARDED_PORT=(bool, False),
     WAGTAIL_SITE_NAME=(str, "Wagtail Starter Kit"),
     WAGTAILADMIN_BASE_URL=(str, "http://localhost:8000"),
 )
@@ -268,9 +269,8 @@ AUTH_PASSWORD_VALIDATORS = []
 # This should be set to your domain or IP address in production
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
-#USE_X_FORWARDED_HOST = env("USE_X_FORWARDED_HOST")
-
-USE_X_FORWARDED_PORT = True
+USE_X_FORWARDED_HOST = env("USE_X_FORWARDED_HOST")
+USE_X_FORWARDED_PORT = env("USE_X_FORWARDED_PORT")
 
 # Increase the maximum number of fields for complex page models
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
