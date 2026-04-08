@@ -37,11 +37,12 @@ fi
 # ---- EXEC ---- #
 
 # ensure mise environment is used from repo
-python3.11 -m granian \
-    --interface asginl \
+exec python3.11 -m uvicorn config.asgi:application \
     --uds "$SOCK" \
-    --uds-permissions 660 \
     --workers 1 \
-    --workers-max-rss 120 \
-    --log-level info \
-    config.asgi:application
+    --loop uvloop \
+    --http h11\
+    --limit-concurrency 64 \
+    --timeout-keep-alive 16 \
+    --backlog 512 \
+    --log-level info 
