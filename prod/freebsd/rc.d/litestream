@@ -11,13 +11,12 @@ rcvar="litestream_enable"
 
 : ${litestream_enable:=NO}
 : ${litestream_config:=/usr/local/etc/litestream.yml}
-: ${litestream_env:=/usr/local/etc/wagtail/env}
 
 pidfile="/var/run/litestream.pid"
 
 command="/usr/sbin/daemon"
 command_args="-u www -p ${pidfile} -f \
-    /bin/sh -c '. ${litestream_env}; exec /usr/local/bin/litestream replicate -config ${litestream_config}'"
+    /usr/local/www/wagtail/prod/freebsd/scripts/litestream.sh"
 
 load_rc_config $name
 
