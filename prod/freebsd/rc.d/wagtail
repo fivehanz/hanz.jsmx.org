@@ -23,9 +23,9 @@ command="/usr/sbin/daemon"
 
 command_args="
 -f
--r
 -u ${wagtail_user}
 -p ${wagtail_pidfile}
+-P
 -o ${wagtail_log}
 ${wagtail_command}
 "
@@ -40,11 +40,8 @@ stop_postcmd="wagtail_poststop"
 
 wagtail_prestart()
 {
-    # remove stale socket
-    [ -S "${wagtail_sock}" ] && rm -f "${wagtail_sock}"
-
-    # remove stale pid
-    [ -f "${wagtail_pidfile}" ] && rm -f "${wagtail_pidfile}"
+    rm -f "${wagtail_sock}" 2>/dev/null || true
+    rm -f "${wagtail_pidfile}" 2>/dev/null || true
 }
 
 wagtail_poststop()
