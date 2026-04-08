@@ -157,7 +157,7 @@ prod-start:
 
 # helper function to run as www on server
 run-www:
-    env HOME=/home/www su -m www -c '$CMD'
+    env HOME=/home/www su -m www -c "sh -c '$CMD'"
 
 git-pull:
 	CMD="git pull --ff-only" just run-www
