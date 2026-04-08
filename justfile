@@ -116,7 +116,7 @@ prepare-pip:
     uv lock
     uv pip compile pyproject.toml > requirements.txt
 setup-pip:
-    CMD="pip install --user -r requirements.txt" just run-www
+    CMD="python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt" just run-www
 
 setup-uv:
     CMD="uv sync --locked --no-cache --no-dev" just run-www

@@ -5,8 +5,9 @@ set -eu
 
 APP_DIR="/usr/local/www/wagtail"
 ENV_FILE="/usr/local/etc/wagtail/env"
-
+VENV="/usr/local/www/wagtail/.venv"
 SOCK="/var/run/wagtail/wagtail.sock"
+export PATH="$VENV/bin:$PATH"
 
 # ---- PREP ---- #
 
@@ -37,7 +38,7 @@ fi
 # ---- EXEC ---- #
 
 # ensure mise environment is used from repo
-exec python3.11 -m uvicorn config.asgi:application \
+exec "$VENV/bin/python" -m uvicorn config.asgi:application \
     --uds "$SOCK" \
     --workers 1 \
     --loop uvloop \
