@@ -7,12 +7,8 @@ APP_DIR="/usr/local/www/wagtail"
 ENV_FILE="/usr/local/etc/wagtail/env"
 
 SOCK="/var/run/wagtail/wagtail.sock"
-UMASK="007"
 
 # ---- PREP ---- #
-
-# ensure predictable permissions for socket (660)
-umask "$UMASK"
 
 # load environment (must exist)
 if [ ! -f "$ENV_FILE" ]; then
