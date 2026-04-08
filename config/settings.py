@@ -268,7 +268,9 @@ AUTH_PASSWORD_VALIDATORS = []
 # This should be set to your domain or IP address in production
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
-USE_X_FORWARDED_HOST = env("USE_X_FORWARDED_HOST")
+#USE_X_FORWARDED_HOST = env("USE_X_FORWARDED_HOST")
+
+USE_X_FORWARDED_PORT = True
 
 # Increase the maximum number of fields for complex page models
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
