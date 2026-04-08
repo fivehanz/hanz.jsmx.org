@@ -49,7 +49,7 @@ wagtail_poststop()
 wagtail_reload()
 {
     if [ -f "${wagtail_pidfile}" ]; then
-        kill -HUP "$(cat ${wagtail_pidfile})" 2>/dev/null || true
+        kill -TERM "$(cat ${wagtail_pidfile})" 2>/dev/null || true
     fi
 }
 
