@@ -3,7 +3,7 @@ access-key-id: ${LITESTREAM_ACCESS_KEY_ID}
 secret-access-key: ${LITESTREAM_SECRET_ACCESS_KEY}
 
 dbs:
-  - path: ${DATABASE_PATH}
+  - path: /var/db/wagtail/database.db
     replicas:
       - type: s3
         # destination
