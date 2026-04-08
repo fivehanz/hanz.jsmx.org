@@ -82,7 +82,9 @@ litestream-backup:
 
 setup-env:
     # env file (secrets)
-    cp $(pwd)/.env.prod /usr/local/etc/wagtail/env
+    awk 'NF && $1 !~ /^#/ {print "export " $0} !NF || $1 ~ /^#/ {print}' \
+		$(pwd)/.env.prod > /usr/local/etc/wagtail/env
+
     chmod 640 /usr/local/etc/wagtail/env
     chown root:www /usr/local/etc/wagtail/env
 
