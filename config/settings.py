@@ -149,6 +149,7 @@ DATABASES = {
                 PRAGMA mmap_size=134217728;
                 PRAGMA journal_size_limit=27103364;
                 PRAGMA cache_size=2000;
+                PRAGMA busy_timeout=5000;
             """,
         },
     }
