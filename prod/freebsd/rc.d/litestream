@@ -12,7 +12,7 @@ rcvar="litestream_enable"
 : ${litestream_enable:=NO}
 : ${litestream_config:=/usr/local/etc/litestream.yml}
 
-pidfile="/var/run/litestream.pid"
+pidfile="/var/run/litestream/litestream.pid"
 supervisor_pidfile="/var/run/litestream-supervisor.pid"
 procname="/usr/local/bin/litestream"
 
@@ -22,5 +22,14 @@ command_args="-u www -p ${pidfile} -P ${supervisor_pidfile} -f \
     /usr/local/www/wagtail/prod/freebsd/scripts/litestream.sh"
 
 load_rc_config $name
+
+
+start_precmd="litestream_prestart"
+
+litestream_prestart()
+{
+    install -d -o www -g www -m 755 /var/run/litestream
+    rm -f "${pidfile}" 2>/dev/null || true
+}
 
 run_rc_command "$1"
