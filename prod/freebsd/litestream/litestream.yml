@@ -6,16 +6,10 @@ dbs:
   - path: ${DATABASE_PATH}
     replicas:
       - type: s3
-        # destination
         bucket: ${LITESTREAM_BUCKET}
         path: database.db
-        # region / endpoint (supports S3-compatible too)
         region: ${LITESTREAM_REGION}
         endpoint: ${LITESTREAM_ENDPOINT_URL}
-        # only needed for MinIO / R2 / non-AWS
         force-path-style: ${LITESTREAM_FORCE_PATH_STYLE}
-        # performance tuning (important for 512MB)
-        sync-interval: 2s
+        sync-interval: 1h
         snapshot-interval: 1h
-        # retention (S3 only)
-        retention: 168h
