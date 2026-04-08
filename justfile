@@ -19,7 +19,7 @@ prod-post-setup:
     just prod-start
 
 freebsd-setup-pkgs:
-    pkg install --yes nginx litestream just python311 py311-uvicorn py311-uvloop py311-pillow py311-pillow-heif py311-granian py311-sqlite3 py311-pip
+    pkg install --yes git nginx litestream just python311 py311-uvicorn py311-uvloop py311-pillow py311-pillow-heif py311-granian py311-sqlite3 py311-pip
 
 freebsd-nginx-configure:
     # enable nginx
