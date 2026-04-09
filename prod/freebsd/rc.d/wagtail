@@ -22,12 +22,13 @@ load_rc_config "$name"
 pidfile="${wagtail_pidfile}"
 
 command="/usr/sbin/daemon"
+procname="/usr/local/www/wagtail/.venv/bin/python"
 
 command_args="-u ${wagtail_runuser} \
-    -p ${pidfile} \
+    -P ${pidfile} \
     -o ${wagtail_log} \
     -f \
-    /usr/bin/env HOME=/home/${wagtail_runuser} USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
+    /usr/bin/env HOME=/nonexistent USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
 extra_commands="reload"
