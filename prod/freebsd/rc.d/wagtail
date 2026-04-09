@@ -12,8 +12,8 @@ rcvar="${name}_enable"
 load_rc_config "$name"
 
 : ${wagtail_enable:=NO}
-: ${wagtail_user:=www}
-: ${wagtail_group:=www}
+: ${wagtail_runuser:=www}
+: ${wagtail_rungroup:=www}
 : ${wagtail_pidfile:=/var/run/wagtail/wagtail.pid}
 : ${wagtail_sock:=/var/run/wagtail/wagtail.sock}
 : ${wagtail_log:=/var/log/wagtail.log}
@@ -23,12 +23,12 @@ pidfile="${wagtail_pidfile}"
 
 command="/usr/sbin/daemon"
 
-command_args="-u ${wagtail_user} \
+command_args="-u ${wagtail_runuser} \
     -p ${pidfile} \
     -o ${wagtail_log} \
     -f \
     -c / \
-    /usr/bin/env HOME=/home/${wagtail_user} USER=${wagtail_user} LOGNAME=${wagtail_user} \
+    /usr/bin/env HOME=/home/${wagtail_runuser} USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
 extra_commands="reload"
@@ -42,13 +42,13 @@ stop_postcmd="wagtail_poststop"
 wagtail_prestart()
 {
     # create runtime dir (every boot)
-    install -d -o ${wagtail_user} -g ${wagtail_group} -m 755 ${wagtail_rundir}
+    install -d -o ${wagtail_runuser} -g ${wagtail_rungroup} -m 755 ${wagtail_rundir}
 
     # create the log file as root and hand it over to the wagtail user
     if [ ! -f "${wagtail_log}" ]; then
         touch "${wagtail_log}"
     fi
-    chown ${wagtail_user}:${wagtail_group} "${wagtail_log}"
+    chown ${wagtail_runuser}:${wagtail_rungroup} "${wagtail_log}"
 
     rm -f "${wagtail_sock}" "${pidfile}" 2>/dev/null || true
 }
