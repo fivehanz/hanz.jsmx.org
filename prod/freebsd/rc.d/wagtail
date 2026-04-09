@@ -14,18 +14,20 @@ load_rc_config "$name"
 : ${wagtail_enable:=NO}
 : ${wagtail_user:=www}
 : ${wagtail_group:=www}
-: ${wagtail_command:=/usr/local/www/wagtail/prod/freebsd/scripts/start.sh}
 : ${wagtail_pidfile:=/var/run/wagtail/wagtail.pid}
-: ${wagtail_supervisor_pidfile:=/var/run/wagtail/supervisor.pid}
 : ${wagtail_sock:=/var/run/wagtail/wagtail.sock}
 : ${wagtail_log:=/var/log/wagtail.log}
 : ${wagtail_rundir:=/var/run/wagtail}
 
 command="/usr/sbin/daemon"
 
-procname="${wagtail_command}"
+procname="wagtail"
 
-command_args="-u ${wagtail_user} -p ${wagtail_pidfile} -P ${wagtail_supervisor_pidfile} -o ${wagtail_log} -f /bin/sh ${wagtail_command}"
+command_args="-u ${wagtail_user} \
+    -P ${wagtail_pidfile} \
+    -o ${wagtail_log} \
+    -f \
+    /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
 extra_commands="reload"
 reload_cmd="wagtail_reload"
@@ -40,7 +42,7 @@ wagtail_prestart()
     # create runtime dir (every boot)
     install -d -o ${wagtail_user} -g ${wagtail_group} -m 755 ${wagtail_rundir}
 
-    rm -f "${wagtail_sock}" "${wagtail_pidfile}" "${wagtail_supervisor_pidfile}" 2>/dev/null || true
+    rm -f "${wagtail_sock}" "${wagtail_pidfile}" 2>/dev/null || true
 }
 
 wagtail_poststop()
