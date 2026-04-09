@@ -27,7 +27,6 @@ command_args="-u ${wagtail_runuser} \
     -p ${pidfile} \
     -o ${wagtail_log} \
     -f \
-    -c / \
     /usr/bin/env HOME=/home/${wagtail_runuser} USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
