@@ -14,25 +14,27 @@ load_rc_config "$name"
 : ${wagtail_enable:=NO}
 : ${wagtail_runuser:=www}
 : ${wagtail_rungroup:=www}
-: ${wagtail_pidfile:=/var/run/wagtail/wagtail.pid}
+: ${wagtail_pidfile:=/var/run/wagtail/supervisor.pid}
+: ${wagtail_child_pidfile:=/var/run/wagtail/app.pid}
 : ${wagtail_sock:=/var/run/wagtail/wagtail.sock}
 : ${wagtail_log:=/var/log/wagtail.log}
 : ${wagtail_rundir:=/var/run/wagtail}
 
 pidfile="${wagtail_pidfile}"
+child_pidfile="${wagtail_child_pidfile}"
 
 command="/usr/sbin/daemon"
-procname="/usr/local/www/wagtail/.venv/bin/python"
+# procname="/usr/local/www/wagtail/.venv/bin/python"
+procname="/usr/sbin/daemon"
 
 command_args="-u ${wagtail_runuser} \
-    -p ${pidfile} \
+    -P ${pidfile} \
+    -p ${child_pidfile} \
     -o ${wagtail_log} \
+    -t ${name} \
     -f \
     /usr/bin/env HOME=/nonexistent USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
-
-extra_commands="reload"
-reload_cmd="wagtail_reload"
 
 start_precmd="wagtail_prestart"
 stop_postcmd="wagtail_poststop"
@@ -50,22 +52,13 @@ wagtail_prestart()
     fi
     chown ${wagtail_runuser}:${wagtail_rungroup} "${wagtail_log}"
 
-    rm -f "${wagtail_sock}" "${pidfile}" 2>/dev/null || true
+    rm -f "${wagtail_sock}" "${pidfile}" "${child_pidfile}" 2>/dev/null || true
 }
 
 wagtail_poststop()
 {
     # cleanup socket after stop
     [ -S "${wagtail_sock}" ] && rm -f "${wagtail_sock}"
-}
-
-wagtail_reload()
-{
-    if [ -f "${pidfile}" ]; then
-        kill -HUP "$(cat ${pidfile})" 2>/dev/null || true
-    else
-        echo "${name} is not running."
-    fi
 }
 
 run_rc_command "$1"
