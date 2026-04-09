@@ -17,7 +17,7 @@ supervisor_pidfile="/var/run/litestream/supervisor.pid"
 procname="/usr/local/bin/litestream"
 
 command="/usr/sbin/daemon"
-command_args="-u www -p ${pidfile} -P ${supervisor_pidfile} -f \
+command_args="-r -u www -p ${pidfile} -P ${supervisor_pidfile} -f \
     -o /var/log/litestream.log -m 3 \
     /usr/local/www/wagtail/prod/freebsd/scripts/litestream.sh"
 
