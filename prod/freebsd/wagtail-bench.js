@@ -18,7 +18,7 @@ export default function () {
   http.get(`${BASE}/about/`);
   http.get(`${BASE}/projects/`);
   http.get(`${BASE}/resources/`);
-  http.get(`${BASE}/contact/`);
+  // http.get(`${BASE}/contact/`);
   http.get(`${BASE}/static/main-D1fVxiCl.css`);
   http.get(`${BASE}/static/main-D8PWxci-.js`);
   //   http.get(`${BASE}/static/main-CvG9S7vg.css`);
