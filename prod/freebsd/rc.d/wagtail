@@ -19,16 +19,16 @@ load_rc_config "$name"
 : ${wagtail_log:=/var/log/wagtail.log}
 : ${wagtail_rundir:=/var/run/wagtail}
 
+pidfile="${wagtail_pidfile}"
+
 command="/usr/sbin/daemon"
 
-procname="wagtail"
-
 command_args="-u ${wagtail_user} \
-    -P ${wagtail_pidfile} \
+    -p ${pidfile} \
     -o ${wagtail_log} \
     -f \
     -c / \
-    /usr/bin/env HOME=/home/www USER=www LOGNAME=www \
+    /usr/bin/env HOME=/home/${wagtail_user} USER=${wagtail_user} LOGNAME=${wagtail_user} \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
 extra_commands="reload"
@@ -44,7 +44,13 @@ wagtail_prestart()
     # create runtime dir (every boot)
     install -d -o ${wagtail_user} -g ${wagtail_group} -m 755 ${wagtail_rundir}
 
-    rm -f "${wagtail_sock}" "${wagtail_pidfile}" 2>/dev/null || true
+    # create the log file as root and hand it over to the wagtail user
+    if [ ! -f "${wagtail_log}" ]; then
+        touch "${wagtail_log}"
+    fi
+    chown ${wagtail_user}:${wagtail_group} "${wagtail_log}"
+
+    rm -f "${wagtail_sock}" "${pidfile}" 2>/dev/null || true
 }
 
 wagtail_poststop()
@@ -55,8 +61,10 @@ wagtail_poststop()
 
 wagtail_reload()
 {
-    if [ -f "${wagtail_pidfile}" ]; then
-        kill -TERM "$(cat ${wagtail_pidfile})" 2>/dev/null || true
+    if [ -f "${pidfile}" ]; then
+        kill -HUP "$(cat ${pidfile})" 2>/dev/null || true
+    else
+        echo "${name} is not running."
     fi
 }
 
