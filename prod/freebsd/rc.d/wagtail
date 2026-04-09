@@ -24,10 +24,10 @@ pidfile="${wagtail_pidfile}"
 child_pidfile="${wagtail_child_pidfile}"
 
 command="/usr/sbin/daemon"
-# procname="/usr/local/www/wagtail/.venv/bin/python"
 procname="/usr/sbin/daemon"
 
-command_args="-u ${wagtail_runuser} \
+command_args="-r -R 5 \
+    -u ${wagtail_runuser} \
     -P ${pidfile} \
     -p ${child_pidfile} \
     -o ${wagtail_log} \
