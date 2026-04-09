@@ -22,9 +22,9 @@ load_rc_config "$name"
 
 command="/usr/sbin/daemon"
 
-command_interpreter="/bin/sh"
+procname="${wagtail_command}"
 
-command_args="-f -u ${wagtail_user} -p ${wagtail_pidfile} -o ${wagtail_log} -m 3 ${wagtail_command}"
+command_args="-f -u ${wagtail_user} -p ${wagtail_pidfile} -o ${wagtail_log} /bin/sh ${wagtail_command}"
 
 extra_commands="reload"
 reload_cmd="wagtail_reload"
