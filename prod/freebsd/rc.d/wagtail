@@ -27,6 +27,7 @@ command_args="-u ${wagtail_user} \
     -P ${wagtail_pidfile} \
     -o ${wagtail_log} \
     -f \
+    /usr/bin/env HOME=/home/www USER=www LOGNAME=www \
     /usr/local/www/wagtail/prod/freebsd/scripts/start.sh"
 
 extra_commands="reload"
