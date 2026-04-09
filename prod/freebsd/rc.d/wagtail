@@ -25,7 +25,7 @@ command="/usr/sbin/daemon"
 procname="/usr/local/www/wagtail/.venv/bin/python"
 
 command_args="-u ${wagtail_runuser} \
-    -P ${pidfile} \
+    -p ${pidfile} \
     -o ${wagtail_log} \
     -f \
     /usr/bin/env HOME=/nonexistent USER=${wagtail_runuser} LOGNAME=${wagtail_runuser} \
