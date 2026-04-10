@@ -32,7 +32,7 @@ echo "== updating =="
 git pull --ff-only
 
 # ---- app updates ----
-just setup-uv
+just setup-pip
 just setup-staticfiles
 just migrate
 
