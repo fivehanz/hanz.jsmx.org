@@ -40,10 +40,10 @@ fi
 # ensure mise environment is used from repo
 exec "$VENV/bin/python" -m uvicorn config.asgi:application \
     --uds "$SOCK" \
-    --workers 1 \
+    --workers 2 \
     --loop uvloop \
     --http h11 \
-    --limit-concurrency 256 \
+    --limit-concurrency 128 \
     --timeout-keep-alive 128 \
     --backlog 8192 \
     --log-level warning 
