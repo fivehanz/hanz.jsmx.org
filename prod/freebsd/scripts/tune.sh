@@ -39,6 +39,9 @@ add_loader net.inet.tcp.tcbhashsize 4096
 add_loader accf_http_load YES
 add_loader accf_data_load YES
 
+# ---- ISR (CRITICAL for 1 CPU) ----
+add_loader net.isr.bindthreads 1
+
 
 # =========================
 # PHASE 2 — RUNTIME
@@ -47,7 +50,6 @@ echo "[*] sysctl.conf tuning"
 
 # ---- ISR (CRITICAL for 1 CPU) ----
 add_sysctl net.isr.dispatch direct
-add_sysctl net.isr.bindthreads 1
 
 # ---- backlog alignment ----
 add_sysctl kern.ipc.somaxconn 8192
