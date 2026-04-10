@@ -35,6 +35,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "wsk-cache",
+        "TIMEOUT": 60 * 60 * 24,
     }
 }
 
