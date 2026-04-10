@@ -19,7 +19,7 @@ export default function () {
   http.get(`${BASE}/projects/`);
   http.get(`${BASE}/resources/`);
   http.get(`${BASE}/services/`);
-  http.get(`${BASE}/static/main-CvG9S7vg.css`);
-  http.get(`${BASE}/static/main-DYi7xrNE.js`);
+  http.get(`${BASE}/static/main-BVK3UCiJ.css`);
+  http.get(`${BASE}/static/main-Di0wIRw8.js`);
   sleep(1 + Math.random() * 4); // critical: prevents generator meltdown
 }
