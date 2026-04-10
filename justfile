@@ -173,7 +173,6 @@ django-install:
 	uv sync
 
 django-dev:
-    DJANGO_SETTINGS_MODULE=config.settings.dev \
     uv run uvicorn config.asgi:application \
         --reload \
         --workers 1 \

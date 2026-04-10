@@ -23,6 +23,8 @@ DJANGO_VITE = {
 WAGTAIL_CACHE = True
 WAGTAIL_CACHE_BACKEND = "default"
 WAGTAIL_CACHE_KEYRING = True
+WAGTAIL_CACHE_HEADER = "X-App-Cache"
+WAGTAIL_CACHE_IGNORE_COOKIES = True
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = env("WAGTAIL_SITE_NAME")
@@ -33,7 +35,6 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "wsk-cache",
-        "TIMEOUT": 60 * 60,
     }
 }
 
