@@ -1,2 +1,2 @@
 # .miserc.toml
-env = ["production"]
+env = ["development"]
