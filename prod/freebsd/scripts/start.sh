@@ -42,7 +42,7 @@ export DJANGO_SETTINGS_MODULE=config.settings.prod
 # ensure mise environment is used from repo
 exec "$VENV/bin/python" -m uvicorn config.asgi:application \
     --uds "$SOCK" \
-    --workers 1 \
+    --workers 2 \
     --loop uvloop \
     --http h11 \
     --limit-concurrency 128 \
