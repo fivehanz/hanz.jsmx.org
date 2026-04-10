@@ -22,6 +22,7 @@ DJANGO_VITE = {
 # Wagtail Cache settings
 WAGTAIL_CACHE = True
 WAGTAIL_CACHE_BACKEND = "default"
+WAGTAIL_CACHE_KEYRING = True
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = env("WAGTAIL_SITE_NAME")
