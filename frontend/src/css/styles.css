@@ -16,7 +16,7 @@
 
 /* default theme */
 @plugin "daisyui/theme" {
-  name: "hanz.jsmx.org";
+  name: "hanz";
   default: true;
   prefersdark: true;
   color-scheme: "dark";
