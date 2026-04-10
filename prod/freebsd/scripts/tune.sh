@@ -20,7 +20,7 @@ add_sysctl() {
 echo "[*] loader.conf tuning"
 
 # ---- ZFS ARC (reduced for safety) ----
-add_loader vfs.zfs.arc_max 96M
+add_loader vfs.zfs.arc.max 96M
 
 # ---- mbufs (controlled) ----
 add_loader kern.ipc.nmbclusters 131072
