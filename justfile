@@ -173,7 +173,12 @@ django-install:
 	uv sync
 
 django-dev:
-    DEBUG=true uv run python manage.py runserver 0.0.0.0:8000
+    DJANGO_SETTINGS_MODULE=config.settings.dev \
+    uv run uvicorn config.asgi:application \
+        --reload \
+        --workers 1 \
+        --host 127.0.0.1 \
+        --port 8000
 
 makemigrations:
 	uv run python manage.py makemigrations
@@ -183,3 +188,7 @@ vite-dev:
 
 vite-build:
 	cd frontend && pnpm run build
+
+
+[parallel]
+dev: django-dev vite-dev

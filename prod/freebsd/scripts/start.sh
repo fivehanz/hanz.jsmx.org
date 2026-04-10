@@ -37,6 +37,8 @@ fi
 
 # ---- EXEC ---- #
 
+export DJANGO_SETTINGS_MODULE=config.settings.prod
+
 # ensure mise environment is used from repo
 exec "$VENV/bin/python" -m uvicorn config.asgi:application \
     --uds "$SOCK" \
