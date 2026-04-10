@@ -58,11 +58,11 @@ add_sysctl net.inet.tcp.syncookies 1
 # ---- TCP Fast Open ----
 add_sysctl net.inet.tcp.fastopen.server_enable 1
 
-# ---- socket buffers (safe max for 512MB) ----
-add_sysctl net.inet.tcp.sendspace 65536
-add_sysctl net.inet.tcp.recvspace 65536
-add_sysctl net.local.stream.sendspace 65536
-add_sysctl net.local.stream.recvspace 65536
+# ---- socket buffers ----
+add_sysctl net.inet.tcp.sendspace 131072
+add_sysctl net.inet.tcp.recvspace 131072
+add_sysctl net.local.stream.sendspace 131072
+add_sysctl net.local.stream.recvspace 131072
 
 # ---- latency optimization ----
 add_sysctl net.inet.tcp.delayed_ack 0
@@ -72,7 +72,8 @@ add_sysctl net.inet.tcp.cc.algorithm cubic
 
 # ---- TIME_WAIT handling ----
 add_sysctl net.inet.tcp.fast_finwait2_recycle 1
-add_sysctl net.inet.tcp.maxtcptw 20000
+add_sysctl net.inet.tcp.msl 15000
+add_sysctl net.inet.tcp.nolocaltimewait 1
 
 # ---- port exhaustion ----
 add_sysctl net.inet.ip.portrange.first 1024
