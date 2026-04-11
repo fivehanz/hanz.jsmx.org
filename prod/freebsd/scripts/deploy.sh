@@ -1,8 +1,10 @@
 #!/bin/sh
 set -eu
 
+APP_USER="www"
 APP_DIR="/usr/local/www/wagtail"
 LOCK="/tmp/wagtail-deploy.lock"
+VENV_PY=".venv/bin/python"
 
 cd "$APP_DIR"
 
@@ -17,11 +19,16 @@ touch "$LOCK"
 
 echo "== deploy start =="
 
-# ---- check for updates ----
-git fetch origin
+# ---- helper ----
+run_app() {
+    su -m "$APP_USER" -c "cd $APP_DIR && sh -c '$1'"
+}
 
-LOCAL=$(git rev-parse HEAD)
-REMOTE=$(git rev-parse origin/main)
+# ---- check for updates ----
+run_app "git fetch origin"
+
+LOCAL=$(run_app "git rev-parse HEAD" | tr -d '\n')
+REMOTE=$(run_app "git rev-parse origin/main" | tr -d '\n')
 
 if [ "$LOCAL" = "$REMOTE" ]; then
     echo "== no changes =="
@@ -29,14 +36,20 @@ if [ "$LOCAL" = "$REMOTE" ]; then
 fi
 
 echo "== updating =="
-git pull --ff-only
+run_app "git pull --ff-only"
 
 # ---- app updates ----
+echo "== setting up pip requirements =="
 just setup-pip
-just setup-staticfiles
-just migrate
+
+echo "== collecting static files =="
+run_app "$VENV_PY manage.py collectstatic --no-input --clear"
+
+echo "== migrating =="
+run_app "export DJANGO_SETTINGS_MODULE=config.settings.prod && $VENV_PY manage.py migrate"
 
 # ---- restart ----
+echo "== restarting =="
 just prod-start
 
 echo "== deploy done =="

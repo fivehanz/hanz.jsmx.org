@@ -117,7 +117,7 @@ prepare-pip:
     uv lock
     uv pip compile pyproject.toml > requirements.txt
 setup-pip:
-    CMD="python3.11 -m venv --system-site-packages .venv && .venv/bin/pip install -r requirements.txt" just run-www
+    CMD="[ -d .venv ] || python3.11 -m venv --system-site-packages .venv && .venv/bin/pip install -r requirements.txt" just run-www
 
 setup-uv:
     CMD="uv sync --locked --no-cache --no-dev" just run-www
@@ -153,7 +153,7 @@ migrate:
 prod-start:
     service litestream restart || service litestream start
     service wagtail restart || service wagtail start
-    service nginx restart || service nginx start
+    service nginx reload
 
 # helper function to run as www on server
 run-www:
