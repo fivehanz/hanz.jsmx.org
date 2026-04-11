@@ -1,5 +1,5 @@
 from .base import *  # noqa: F401, F403
-from .base import env, environ, STORAGES
+from .base import env, environ, STORAGES, DATABASES
 
 environ.Env.read_env("/usr/local/etc/wagtail/env")
 
@@ -66,3 +66,6 @@ USE_X_FORWARDED_PORT = env("USE_X_FORWARDED_PORT")
 STORAGES["default"]["OPTIONS"]["public_endpoint_url"] = env(
     "AWS_S3_PUBLIC_ENDPOINT_URL", default="http://localhost:9000"
 )
+
+# Database Path
+DATABASES["default"]["NAME"] = env("DATABASE_PATH")
