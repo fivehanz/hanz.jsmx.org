@@ -181,7 +181,7 @@ django-dev:
         --port 8000
 
 makemigrations:
-	uv run python manage.py makemigrations
+	uv run manage.py makemigrations
 
 vite-dev:
 	cd frontend && pnpm run dev
