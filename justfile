@@ -141,6 +141,9 @@ setup-pf:
     # show active rules (sanity check)
     pfctl -sr
 
+setup-cron:
+    sh $(pwd)/prod/freebsd/scripts/setup-cron.sh
+
 setup-staticfiles:
 	CMD="$VENV_PY manage.py collectstatic --no-input --clear" just run-www
 
