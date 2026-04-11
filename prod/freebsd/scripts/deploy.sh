@@ -46,7 +46,7 @@ echo "== collecting static files =="
 run_app "$VENV_PY manage.py collectstatic --no-input --clear"
 
 echo "== migrating =="
-run_app "export DJANGO_SETTINGS_MODULE=config.settings.prod && $VENV_PY manage.py migrate"
+run_app "DJANGO_SETTINGS_MODULE=config.settings.prod $VENV_PY manage.py migrate"
 
 # ---- restart ----
 echo "== restarting =="
