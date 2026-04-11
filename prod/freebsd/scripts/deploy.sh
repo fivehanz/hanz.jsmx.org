@@ -8,6 +8,8 @@ VENV_PY=".venv/bin/python"
 
 cd "$APP_DIR"
 
+echo "==== $(date '+%Y-%m-%d %H:%M:%S') ===="
+
 # ---- lock ----
 if [ -f "$LOCK" ]; then
     echo "== deploy already running =="

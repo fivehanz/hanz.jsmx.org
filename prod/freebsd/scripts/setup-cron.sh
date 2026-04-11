@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-CRON_LINE='* * * * * date "+\n==== %Y-%m-%d %H:%M:%S ====" >> /var/log/wagtail-deploy.log 2>&1; /usr/local/www/wagtail/deploy.sh >> /var/log/wagtail-deploy.log 2>&1'
+CRON_LINE="* * * * * /usr/local/www/wagtail/prod/freebsd/scripts/deploy.sh >> /var/log/wagtail-deploy.log 2>&1"
 
 LOG_FILE="/var/log/wagtail-deploy.log"
 TMP_CRON="/tmp/wagtail-cron.tmp"
