@@ -1,6 +1,6 @@
 [tools]
-litestream = "0.5"
-node = "22"
+# litestream = "0.5"
+node = "24"
 pnpm = "10"
 python = "3.11"
-uv = "0.10"
+uv = "0.11"
