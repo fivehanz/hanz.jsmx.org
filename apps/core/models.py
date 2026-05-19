@@ -13,7 +13,7 @@ class BasePage(WagtailCacheMixin, SeoMixin, Page):
     Inherits from SeoMixin to provide SEO functionality via wagtail-seo.
     """
 
-    cache_control = "public, max-age=3600, stale-while-revalidate=60"
+    cache_control = "public, max-age=300, stale-while-revalidate=60"
 
     # Add a UUID field to provide a stable identifier for all page types
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
