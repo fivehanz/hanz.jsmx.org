@@ -192,6 +192,8 @@ vite-dev:
 vite-build:
 	cd frontend && pnpm run build
 
+[parallel]
+install: vite-install django-install
 
 [parallel]
 dev: django-dev vite-dev
