@@ -20,7 +20,7 @@ dependencies = [
   "uuid6>=2025.0.1",
   "uvicorn==0.41.0",
   "uvloop==0.21.0",
-  "wagtail>=7.0,<7.1",
+  "wagtail>=7.4,<7.5",
   "wagtail-cache>=3.0.0",
   "wagtail-flexible-forms>=2.1.0",
   "wagtail-seo>=3.1.0",
